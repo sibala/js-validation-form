@@ -13,46 +13,73 @@ registerForm.addEventListener('submit', function(event) {
 	let inputCity 		= document.getElementById('inputCity');
 	let inputZip 		= document.getElementById('inputZip');
 	let gridCheck 		= document.getElementById('gridCheck');
-
+	
+	let formMessages 	= document.getElementById('form-messages');
 	let errorMessages = ''
 
 	// Must not be empty
 	if (inputEmail.value === '') {
-		errorMessages = 'Email får ej vara tomt';	
+		errorMessages = '<li>Email får ej vara tomt</li>';	
 	}
 	if (inputPassword.value === '') {
-		errorMessages += '\nLösenord 1 får ej vara tomt';	
+		errorMessages += '<li>Lösenord 1 får ej vara tomt</li>';	
 	}
 	if (inputPassword.value === '' && inputRePassword.value === '') {
-		errorMessages += '\nLösenord 2 får ej vara tomt';	
+		errorMessages += '<li>Lösenord 2 får ej vara tomt</li>';	
 	}
 	if (inputAddress.value === '') {
-		errorMessages += '\nAdress får ej vara tomt';	
+		errorMessages += '<li>Adress får ej vara tomt</li>';	
 	}
 	if (inputAddress2.value === '') {
-		errorMessages += '\nAdress2 får ej vara tomt';	
+		errorMessages += '<li>Adress2 får ej vara tomt</li>';	
 	}
 	if (inputCity.value === '') {
-		errorMessages += '\nStad får ej vara tomt';	
+		errorMessages += '<li>Stad får ej vara tomt</li>';	
 	}
 	if (inputZip.value === '') {
-		errorMessages += '\nPostnummer får ej vara tomt';	
+		errorMessages += '<li>Postnummer får ej vara tomt</li>';	
 	}
 	if (gridCheck.checked === false) {
-		errorMessages += '\nMåste bli checkad';
+		errorMessages += '<li>Måste bli checkad</li>';
 	}
 
 	// Check password has at least 6 chars
-	if (inputPassword.value !== '' && inputPassword.value.length < 6
+	if (inputPassword.value !== '' 
+		&& inputPassword.value.length < 6
 	) {
-		errorMessages += '\nLösenordet måste vara minst 6 karaktärer långt';	
+		errorMessages += '<li>Lösenordet måste vara minst 6 karaktärer långt</li>';
 	}
 
 	// Check that retyped password is equal password
 	if (inputRePassword.value !== inputPassword.value) {
-		errorMessages += '\nLösenordet 2 överensstämmer inte med lösenordet 1';	
+		errorMessages += '<li>Lösenordet 2 överensstämmer inte med lösenordet 1</li>';
 	}
 
-
-	alert(errorMessages);
+	if (errorMessages !== '') {
+		formMessages.innerHTML = 
+			'<div class="alert alert-danger" role="alert">' + 
+				'<ul>' +
+					errorMessages +
+				'</ul>' +
+			'</div>';
+	} else {
+		formMessages.innerHTML = 
+			'<div class="alert alert-success" role="alert">' + 
+				'Ditt formulär är skickat :)'
+			'</div>';
+	}
 })
+
+let inputBirthYear = document.getElementById('inputBirthYear');
+let yearRange = '';
+for (var year = 2020; year >= 1920; year--) {
+	if (year === 1990) {
+		yearRange += '<option selected>' + year + '</option>';
+	} else {
+		yearRange += '<option>' + year + '</option>';
+	}
+}
+
+inputBirthYear.innerHTML = yearRange;
+
+
