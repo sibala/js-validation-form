@@ -55,6 +55,7 @@ registerForm.addEventListener('submit', function(event) {
 		errorMessages += '<li>Lösenordet 2 överensstämmer inte med lösenordet 1</li>';
 	}
 
+	// Display form message
 	if (errorMessages !== '') {
 		formMessages.innerHTML = 
 			'<div class="alert alert-danger" role="alert">' + 
@@ -70,6 +71,8 @@ registerForm.addEventListener('submit', function(event) {
 	}
 })
 
+
+// Generate year options for the dropdown 'Birth year'
 let inputBirthYear = document.getElementById('inputBirthYear');
 let yearRange = '';
 for (var year = 2020; year >= 1920; year--) {
