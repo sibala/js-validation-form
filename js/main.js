@@ -18,25 +18,25 @@ registerForm.addEventListener('submit', function(event) {
 	let errorMessages 	= ''
 
 	// Must not be empty
-	if (inputEmail.value === '') {
+	if (isStringEmpty(inputEmail)) {
 		errorMessages = '<li>Email får ej vara tomt</li>';	
 	}
-	if (inputPassword.value === '') {
+	if (isStringEmpty(inputPassword)) {
 		errorMessages += '<li>Lösenord 1 får ej vara tomt</li>';	
 	}
-	if (inputPassword.value === '' && inputRePassword.value === '') {
+	if (isStringEmpty(inputPassword) && isStringEmpty(inputRePassword)) {
 		errorMessages += '<li>Lösenord 2 får ej vara tomt</li>';	
 	}
-	if (inputAddress.value === '') {
+	if (isStringEmpty(inputAddress)) {
 		errorMessages += '<li>Adress får ej vara tomt</li>';	
 	}
-	if (inputAddress2.value === '') {
+	if (isStringEmpty(inputAddress2)) {
 		errorMessages += '<li>Adress2 får ej vara tomt</li>';	
 	}
-	if (inputCity.value === '') {
+	if (isStringEmpty(inputCity)) {
 		errorMessages += '<li>Stad får ej vara tomt</li>';	
 	}
-	if (inputZip.value === '') {
+	if (isStringEmpty(inputZip)) {
 		errorMessages += '<li>Postnummer får ej vara tomt</li>';	
 	}
 	if (gridCheck.checked === false) {
@@ -72,17 +72,75 @@ registerForm.addEventListener('submit', function(event) {
 })
 
 
-// Generate year options for the dropdown 'Birth year'
-let inputBirthYear = document.getElementById('inputBirthYear');
-let yearRange = '';
-for (var year = 2020; year >= 1920; year--) {
-	if (year === 1990) {
-		yearRange += '<option selected>' + year + '</option>';
-	} else {
-		yearRange += '<option>' + year + '</option>';
+function generateYearSelectOptionsHtml(startYear, endYear, defaultYear) {
+	let yearRange = '';
+	for (var year = startYear; year >= endYear; year--) {
+		if (year === defaultYear) {
+			yearRange += '<option selected>' + year + '</option>';
+		} else {
+			yearRange += '<option>' + year + '</option>';
+		}
 	}
+
+	return yearRange;
 }
 
-inputBirthYear.innerHTML = yearRange;
+let inputBirthYear = document.getElementById('inputBirthYear');
+inputBirthYear.innerHTML = generateYearSelectOptionsHtml(2010, 1920, 1940);
+
+
+
+
+
+function isStringEmpty(inputField) {
+	let string = inputField.value;
+	let trimmedString = string.trim();
+
+	return trimmedString === '';
+}
+
+// Declaring function standard way
+// This way of declaring functions. allows usage before declaration.
+// Javascript automaticcally moves this kind of declaration to the top of the script
+// This procedure is called hoisting
+dummyFunction();
+function dummyFunction() {
+	console.log('This is a standard declaration of a function');
+}
+
+// Must be called after declaration
+var dummyFunction2 = function() {
+	console.log('Function declared with "Function expression"')
+}
+dummyFunction2();
+
+// Selv invoking function
+(function() {
+	console.log('Self invoking, Baby!')
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
