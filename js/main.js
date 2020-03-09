@@ -15,7 +15,7 @@ registerForm.addEventListener('submit', function(event) {
 	let gridCheck 		= document.getElementById('gridCheck');
 	
 	let formMessages 	= document.getElementById('form-messages');
-	let errorMessages = ''
+	let errorMessages 	= ''
 
 	// Must not be empty
 	if (inputEmail.value === '') {
